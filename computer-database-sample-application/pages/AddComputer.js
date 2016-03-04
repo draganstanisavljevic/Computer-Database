@@ -5,7 +5,6 @@ var AddComputerPage = function() {
 	var pageUrl = "http://computer-database.herokuapp.com/computers/new";
 
 	var addComputerPageTitleXpath = "/html/body/section/h1";
-	//var addComputerPageTitleValue = "Add a computer";	
 	var computerNameLabelXpath = "/html/body/section/form/fieldset/div/label";
 	var introducedLabelXpath = "/html/body/section/form/fieldset/div[2]/label";
 	var discontinuedDateLabelXpath = "/html/body/section/form/fieldset/div[3]/label";
@@ -95,6 +94,10 @@ var AddComputerPage = function() {
 	
 	this.submitForm = function(){
 		submitButton.click();
+	}
+
+	this.clickCancelButton = function(){
+		cancelLink.click();
 	}	
 
 };

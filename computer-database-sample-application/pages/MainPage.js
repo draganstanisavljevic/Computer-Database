@@ -98,6 +98,10 @@ var MainPage = function() {
 	  searchSubmitButton.click();
   }
   
+  this.isSucesfullyAddedMesagePresent = function() {
+	return sucesfullyAddedMesage.isPresent();
+  } 
+  
 };
 
 module.exports = MainPage;
