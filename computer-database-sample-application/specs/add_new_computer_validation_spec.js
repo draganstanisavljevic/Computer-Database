@@ -56,4 +56,32 @@ describe('Add New Computer', function() {
 
 	
 	});
+	
+
+	it('should submit form on Add Computer page with empty name', function() {
+		browser.ignoreSynchronization = true;
+		
+		var AddComputer = new addComputerPageObject();
+		var MainPage = new mainPagePageObject();
+		MainPage.get(); 
+		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
+		
+		MainPage.clickAddNewComputerButton();
+		
+		
+		expect(AddComputer.getPageTitle()).toEqual(addComputerPageTitleValue);
+		
+		AddComputer.setComputerName(computerTitle);
+		AddComputer.setIntroducedDate(introducedDate);
+		AddComputer.setDiscontinuedDate(discontinuedDate);
+		AddComputer.setCompany();
+		AddComputer.clickCancelButton();
+		
+		expect(MainPage.getSucesfullyAddedMesage()).not.toBe(sucesfullyAddedMesage);
+		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
+			
+
+	
+	});	
+	
 });
