@@ -1,8 +1,3 @@
-// spec.js
-//Scenario: go to Add new computer page, enter all valid data and click Cancel button
-//Expected: * User is redirected to C view
-//		  * No Notification message about creation of C is shown
-
 'use strict';
 var addComputerPageObject = require('../pages/AddComputer.js')
 var mainPagePageObject = require('../pages/MainPage.js')
@@ -32,6 +27,11 @@ describe('Add New Computer', function() {
 	var sucesfullyAddedMesage = "Done! Computer " + computerTitle + " has been created";
  
 	it('should cancel form on Add Computer page with all valid values', function() {
+		// spec.js
+		//Scenario: go to Add new computer page, enter all valid data and click Cancel button
+		//Expected: * User is redirected to C view
+		//		  * No Notification message about creation of C is shown
+
 		browser.ignoreSynchronization = true;
 		
 		var AddComputer = new addComputerPageObject();
