@@ -1,3 +1,5 @@
+// spec.js
+
 'use strict';
 var addComputerPageObject = require('../pages/AddComputer.js')
 var mainPagePageObject = require('../pages/MainPage.js')
@@ -13,6 +15,9 @@ describe('Add New Computer', function() {
 	var expectedDiscontinuedDateInSearchTable = "05 May 2016";	
 	var company = "Sony";
 	
+	var AddComputer;
+	var MainPage;
+	
 	
 	function makeComputerTitle(){
 		var text = "";
@@ -25,22 +30,20 @@ describe('Add New Computer', function() {
 	}
 
 	var sucesfullyAddedMesage = "Done! Computer " + computerTitle + " has been created";
+	
+	beforeEach(function() {
+		browser.ignoreSynchronization = true;
+		
+		AddComputer = new addComputerPageObject();
+		MainPage = new mainPagePageObject();
+		MainPage.get(); 
+		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
+		
+		MainPage.clickAddNewComputerButton();
+		
+	});
  
 	it('should cancel form on Add Computer page with all valid values', function() {
-		// spec.js
-		//Scenario: go to Add new computer page, enter all valid data and click Cancel button
-		//Expected: * User is redirected to C view
-		//		  * No Notification message about creation of C is shown
-
-		browser.ignoreSynchronization = true;
-		
-		var AddComputer = new addComputerPageObject();
-		var MainPage = new mainPagePageObject();
-		MainPage.get(); 
-		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
-		
-		MainPage.clickAddNewComputerButton();
-		
 		
 		expect(AddComputer.getPageTitle()).toEqual(addComputerPageTitleValue);
 		
@@ -53,34 +56,20 @@ describe('Add New Computer', function() {
 		expect(MainPage.getSucesfullyAddedMesage()).not.toBe(sucesfullyAddedMesage);
 		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
 			
-
-	
 	});
 	
-
 	it('should submit form on Add Computer page with empty name', function() {
-		browser.ignoreSynchronization = true;
-		
-		var AddComputer = new addComputerPageObject();
-		var MainPage = new mainPagePageObject();
-		MainPage.get(); 
-		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
-		
-		MainPage.clickAddNewComputerButton();
-		
-		
+			
 		expect(AddComputer.getPageTitle()).toEqual(addComputerPageTitleValue);
 		
-		AddComputer.setComputerName(computerTitle);
+		AddComputer.setComputerName("");
 		AddComputer.setIntroducedDate(introducedDate);
 		AddComputer.setDiscontinuedDate(discontinuedDate);
 		AddComputer.setCompany();
-		AddComputer.clickCancelButton();
+		AddComputer.submitForm();
 		
-		expect(MainPage.getSucesfullyAddedMesage()).not.toBe(sucesfullyAddedMesage);
-		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
-			
-
+		var errorMessageContainer = element(by.xpath("/html/body/section/form/fieldset/div[1]"));
+		expect(errorMessageContainer.getAttribute("class")).toEqual("clearfix error");
 	
 	});	
 	
