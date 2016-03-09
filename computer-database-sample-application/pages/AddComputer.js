@@ -15,6 +15,8 @@ var AddComputerPage = function() {
 	var companySelectBoxXpath = "/html/body/section/form/fieldset/div[4]/div/select";
 	var submitButtonXpath = "/html/body/section/form/div/input";
 	var cancelLinkText = "Cancel";
+	var errorMessageContainerXpath = "/html/body/section/form/fieldset/div[1]";
+	var deleteButtonXpath = "/html/body/section/form[2]/input";
 	
 	var pageTitleElement = element(by.xpath(addComputerPageTitleXpath));
 	var computerNameLabel =  element(by.xpath(computerNameLabelXpath));
@@ -27,6 +29,8 @@ var AddComputerPage = function() {
 	var companySelectBox =  element(by.xpath(companySelectBoxXpath));
 	var submitButton = element(by.xpath(submitButtonXpath));
 	var cancelLink = element(by.linkText(cancelLinkText));
+	var errorMessageContainer = element(by.xpath(errorMessageContainerXpath));
+	var deleteButton = element(by.xpath(deleteButtonXpath));
 	
 	this.get = function() {
 		browser.get(pageUrl);
@@ -98,7 +102,36 @@ var AddComputerPage = function() {
 
 	this.clickCancelButton = function(){
 		cancelLink.click();
-	}	
+	};
+	
+	this.getErrorMessageContainerClass = function(){
+		errorMessageContainer.getAttribute("class");
+	};	
+
+	this.getDeleteButton = function(){
+		return deleteButton;
+	};
+	
+	this.deleteComputer = function(){
+		return this.getDeleteButton().click();
+	};
+
+	this.cancelFilledForm = function(name, introducedDate, discontinuedDate, company){
+		this.setComputerName(name);
+		this.setIntroducedDate(introducedDate);
+		this.setDiscontinuedDate(discontinuedDate);
+		this.setCompany(company);
+		this.clickCancelButton();
+	};
+	
+	this.submitAddComputerForm = function(name, introducedDate, discontinuedDate, company){
+		this.setComputerName(name);
+		this.setIntroducedDate(introducedDate);
+		this.setDiscontinuedDate(discontinuedDate);
+		this.setCompany(company);
+		submitButton.click();
+	};	
+	
 
 };
 

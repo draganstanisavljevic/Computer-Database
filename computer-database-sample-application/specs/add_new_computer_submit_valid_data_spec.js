@@ -1,15 +1,15 @@
-// spec.js
-//Scenario: submit Add new computer form with valid data
-//Expected: * User is redirected to C view
-//		  * ${Random} computer is appeared in table
-//		  * ${Random} computer has valid info which was entered by user
-//		  * Notification message is shown that C has been created
-
 'use strict';
 var addComputerPageObject = require('../pages/AddComputer.js')
 var mainPagePageObject = require('../pages/MainPage.js')
 
 describe('Add New Computer', function() {
+	
+	// spec.js
+	//Scenario: submit Add new computer form with valid data
+	//Expected: * User is redirected to C view
+	//		  * ${Random} computer is appeared in table
+	//		  * ${Random} computer has valid info which was entered by user
+	//		  * Notification message is shown that C has been created
 	
 	var addComputerPageTitleValue = "Add a computer";
 	var computerNameLabelValue =  "Computer name";
@@ -56,11 +56,8 @@ describe('Add New Computer', function() {
 		
 		expect(AddComputer.getPageTitle()).toEqual(addComputerPageTitleValue);
 		
-		AddComputer.setComputerName(computerTitle);
-		AddComputer.setIntroducedDate(introducedDate);
-		AddComputer.setDiscontinuedDate(discontinuedDate);
-		AddComputer.setCompany();
-		AddComputer.submitForm();
+		AddComputer.submitAddComputerForm(computerTitle, introducedDate, discontinuedDate, company );
+		
 		expect(MainPage.getSucesfullyAddedMesage()).toEqual(sucesfullyAddedMesage);
 		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
 			

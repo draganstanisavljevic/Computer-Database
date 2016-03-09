@@ -16,6 +16,7 @@ var MainPage = function() {
   var discontinuedLinkText = "Discontinued";
   var companyLinkText = "Company";
   var sucesfullAddedMesageXpath = "/html/body/section/div";
+  var succesfullyDeletedMesageXpath = "/html/body/section/div[1]"
   
   var nameOfTheApplicationInHeaderElement = element(by.xpath(nameOfTheApplicationInHeaderXpath));
   var searchBoxInputField = element(by.id(searchBoxId));
@@ -29,6 +30,7 @@ var MainPage = function() {
   var discontinuedLink = element(by.linkText(discontinuedLinkText));
   var companyLink = element(by.linkText(companyLinkText));
   var sucesfullyAddedMesage = element(by.xpath(sucesfullAddedMesageXpath));
+  var succesfullyDeletedMesageContainer = element(by.xpath(succesfullyDeletedMesageXpath));
   
   this.get = function() {
     browser.get(host);
@@ -96,11 +98,33 @@ var MainPage = function() {
   
   this.submitSearch = function () {
 	  searchSubmitButton.click();
-  }
+  };
   
   this.isSucesfullyAddedMesagePresent = function() {
 	return sucesfullyAddedMesage.isPresent();
-  } 
+  }; 
+  
+ this.clickComputerNameLink = function() {
+	return computerNameLink.click();
+ };
+ 
+ this.getComputerNameLink = function(computerName) {
+	return element(by.linkText(computerName));
+ }; 
+ 
+ this.findComputer = function(computerName) {
+	this.setSearchField(computerName);
+	this.submitSearch();
+ };
+ 
+ this.openEditComputerPage = function(computerName) {
+	this.findComputer(computerName);
+	this.getComputerNameLink(computerName).click();
+ };
+ 
+ this.getSuccessfullyDeletedMessage = function(computerName) {
+	return succesfullyDeletedMesageContainer.getText();
+ }; 
   
 };
 

@@ -47,11 +47,7 @@ describe('Add New Computer', function() {
 		
 		expect(AddComputer.getPageTitle()).toEqual(addComputerPageTitleValue);
 		
-		AddComputer.setComputerName(computerTitle);
-		AddComputer.setIntroducedDate(introducedDate);
-		AddComputer.setDiscontinuedDate(discontinuedDate);
-		AddComputer.setCompany();
-		AddComputer.clickCancelButton();
+		AddComputer.cancelFilledForm(computerTitle, introducedDate, discontinuedDate, company );
 		
 		expect(MainPage.getSucesfullyAddedMesage()).not.toBe(sucesfullyAddedMesage);
 		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
@@ -60,13 +56,8 @@ describe('Add New Computer', function() {
 	
 	it('should submit form on Add Computer page with empty name', function() {
 			
-		expect(AddComputer.getPageTitle()).toEqual(addComputerPageTitleValue);
-		
-		AddComputer.setComputerName("");
-		AddComputer.setIntroducedDate(introducedDate);
-		AddComputer.setDiscontinuedDate(discontinuedDate);
-		AddComputer.setCompany();
-		AddComputer.submitForm();
+		expect(AddComputer.getPageTitle()).toEqual(addComputerPageTitleValue);		
+		AddComputer.submitAddComputerForm("", introducedDate, discontinuedDate, company );
 		
 		var errorMessageContainer = element(by.xpath("/html/body/section/form/fieldset/div[1]"));
 		expect(errorMessageContainer.getAttribute("class")).toEqual("clearfix error");
