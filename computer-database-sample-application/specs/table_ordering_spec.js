@@ -25,7 +25,16 @@ describe('Check counter after adding, deleting and cancelling', function() {
 				
 	});
 	
-	it('should increase total computer counter after adding new computer', function() {
+	it('table should be ordered', function() {
+		
+		//1. Add new C with Name AA
+		//Expected: * A is shown in table
+		//2. Add new C with Name AAA
+		//Expected: * AAA is shown in the table after AA
+		//3. Add new C with Name 0
+		//Expected: * 0 is shown in the table before a
+		//4. Add new C with Name -1
+		//Expected: * -1 is shown in the table before 0
 			
 		MainPage.getTotalAmountsOfComputersElement().then(function(original_text){
 			var computerTitle = "AA";
