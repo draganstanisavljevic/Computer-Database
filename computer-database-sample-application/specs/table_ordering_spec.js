@@ -42,13 +42,6 @@ describe('Check counter after adding, deleting and cancelling', function() {
 			MainPage.get();
 			var resultTable = element(by.tagName("table"));
 			var listOfComputers = resultTable.all(by.tagName("td")).all(by.tagName("a"));		
-			var items = resultTable.all(by.tagName("td")).all(by.tagName("a")).map(function(elm, index) {
-				console.log("INDEX=" + index + ": TEXT " + elm.getText());
-				return {
-					index: index,
-					text:elm.getText()
-			  };
-			});
 			
 			 resultTable.all(by.tagName("td")).all(by.tagName("a")).map(function(elm, index) {
 				return {
