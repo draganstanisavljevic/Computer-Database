@@ -1,5 +1,6 @@
 'use strict';
 var mainPagePageObject = require('../pages/MainPage.js')
+var header = require('../pages/Header.js')
 
 // spec.js
 describe('Computer Database Main Page', function() {
@@ -8,6 +9,7 @@ var nameOfTheApplicationInHeader = "Play sample application — Computer databas
 var totalAmountsOfComputers = "computers found"
 
 var MainPage = new mainPagePageObject();
+var Header = new header();
   
   
   it('should check all elements on the page', function() {
@@ -15,7 +17,7 @@ var MainPage = new mainPagePageObject();
 
 		MainPage.get();
 
-		expect(MainPage.getNameOfTheApplicationInHeaderElement()).toEqual(nameOfTheApplicationInHeader);
+		expect(Header.getNameOfTheApplicationInHeaderElement()).toEqual(nameOfTheApplicationInHeader);
 		expect(MainPage.getTotalAmountsOfComputersElement()).toMatch(totalAmountsOfComputers);
 		expect(MainPage.isSearchBoxInputFieldPresent()).toBe(true);
 		expect(MainPage.isSearchSubmitButtonPresent()).toBe(true);
@@ -28,4 +30,3 @@ var MainPage = new mainPagePageObject();
 		expect(MainPage.isCompanyLinkPresent()).toBe(true);
   });
 });
-

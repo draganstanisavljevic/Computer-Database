@@ -3,7 +3,6 @@
 var MainPage = function() {
 
   var host = "http://computer-database.herokuapp.com/computers";
-  var nameOfTheApplicationInHeaderXpath = "/html/body/header/h1/a";
   var searchBoxId = "searchbox";  
   var searchSubmitId = "searchsubmit";
   var addNewComputerId = "add";
@@ -19,8 +18,6 @@ var MainPage = function() {
   var succesfullyDeletedMesageXpath = "//*[@id='main']/div[1]"
   var totalAmountsOfComputersXpath = "//*[@id='main']/h1";
   
-  
-  var nameOfTheApplicationInHeaderElement = element(by.xpath(nameOfTheApplicationInHeaderXpath));
   var searchBoxInputField = element(by.id(searchBoxId));
   var totalAmountsOfComputersElement = element(by.xpath(totalAmountsOfComputersXpath));
   var searchSubmitButton = element(by.id(searchSubmitId));
@@ -41,10 +38,6 @@ var MainPage = function() {
   this.getHost = function() {
     return host;
   };
-  
-  this.getNameOfTheApplicationInHeaderElement = function() {
-	return nameOfTheApplicationInHeaderElement.getText();
-  }
   
   this.getTotalAmountsOfComputersElement = function() {
 	return totalAmountsOfComputersElement.getText();
