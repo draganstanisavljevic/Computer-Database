@@ -15,12 +15,14 @@ var MainPage = function() {
   var introducedLinkText = "Introduced";
   var discontinuedLinkText = "Discontinued";
   var companyLinkText = "Company";
-  var sucesfullAddedMesageXpath = "/html/body/section/div";
-  var succesfullyDeletedMesageXpath = "/html/body/section/div[1]"
+  var sucesfullAddedMesageXpath = "//*[@id='main']/div[1]";
+  var succesfullyDeletedMesageXpath = "//*[@id='main']/div[1]"
+  var totalAmountsOfComputersXpath = "//*[@id='main']/h1";
+  
   
   var nameOfTheApplicationInHeaderElement = element(by.xpath(nameOfTheApplicationInHeaderXpath));
   var searchBoxInputField = element(by.id(searchBoxId));
-  var totalAmountsOfComputersElement = element(by.xpath('/html/body/section/h1'));
+  var totalAmountsOfComputersElement = element(by.xpath(totalAmountsOfComputersXpath));
   var searchSubmitButton = element(by.id(searchSubmitId));
   var addNewComputerButton = element(by.id(addNewComputerId));
   var previousButton = element(by.linkText(previousButtonText));

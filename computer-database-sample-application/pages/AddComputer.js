@@ -4,29 +4,26 @@ var AddComputerPage = function() {
 	
 	var pageUrl = "http://computer-database.herokuapp.com/computers/new";
 
-	var addComputerPageTitleXpath = "/html/body/section/h1";
-	var computerNameLabelXpath = "/html/body/section/form/fieldset/div/label";
-	var introducedLabelXpath = "/html/body/section/form/fieldset/div[2]/label";
-	var discontinuedDateLabelXpath = "/html/body/section/form/fieldset/div[3]/label";
-	var companyLabelXpath = "/html/body/section/form/fieldset/div[4]/label";
-	var computerNameInputBoxXpath = "/html/body/section/form/fieldset/div/div/input";
-	var introducedInputBoxXpath = "/html/body/section/form/fieldset/div[2]/div/input";
-	var discontinuedDateInputBoxPath = "/html/body/section/form/fieldset/div[3]/div/input";
-	var companySelectBoxXpath = "/html/body/section/form/fieldset/div[4]/div/select";
-	var submitButtonXpath = "/html/body/section/form/div/input";
+	var addComputerPageTitleXpath = "//*[@id='main']/h1";
+	var computerNameLabelXpath = "//*[@id='main']/form/fieldset/div[1]/label";
+	var introducedLabelXpath = "//*[@id='main']/form/fieldset/div[2]/label";
+	var discontinuedDateLabelXpath = "//*[@id='main']/form/fieldset/div[3]/label";
+	var companyLabelXpath = "//*[@id='main']/form/fieldset/div[4]/label";
+	var submitButtonXpath = "//*[@id='main']/form/div/input";
 	var cancelLinkText = "Cancel";
-	var errorMessageContainerXpath = "/html/body/section/form/fieldset/div[1]";
-	var deleteButtonXpath = "/html/body/section/form[2]/input";
+	//var errorMessageContainerXpath = "/html/body/section/form/fieldset/div[1]";
+	var errorMessageContainerXpath = "//*[@id='main']/div[1]";	
+	var deleteButtonXpath = "//*[@id='main']/form[2]/input";
 	
 	var pageTitleElement = element(by.xpath(addComputerPageTitleXpath));
 	var computerNameLabel =  element(by.xpath(computerNameLabelXpath));
 	var introducedLabel =  element(by.xpath(introducedLabelXpath));
 	var discontinuedDateLabel =  element(by.xpath(discontinuedDateLabelXpath));
 	var companyLabel =  element(by.xpath(companyLabelXpath));
-	var computerNameInputBox =  element(by.xpath(computerNameInputBoxXpath));
-	var introducedInputBox =  element(by.xpath(introducedInputBoxXpath));
-	var discontinuedDateInput =  element(by.xpath(discontinuedDateInputBoxPath));
-	var companySelectBox =  element(by.xpath(companySelectBoxXpath));
+	var computerNameInputBox =  element(by.id("name"));
+	var introducedInputBox =  element(by.id("introduced"));
+	var discontinuedDateInput =  element(by.id("discontinued"));
+	var companySelectBox =  element(by.id("company"));
 	var submitButton = element(by.xpath(submitButtonXpath));
 	var cancelLink = element(by.linkText(cancelLinkText));
 	var errorMessageContainer = element(by.xpath(errorMessageContainerXpath));
