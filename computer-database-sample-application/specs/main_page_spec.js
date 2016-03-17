@@ -2,6 +2,8 @@
 var mainPagePageObject = require('../pages/MainPage.js')
 var header = require('../pages/Header.js')
 
+var argv = require('minimist')(process.argv.slice(2));
+
 // spec.js
 describe('Computer Database Main Page', function() {
 
@@ -13,9 +15,19 @@ var Header = new header();
   
   
   it('should check all elements on the page', function() {
+	  /*
+		1.Verify layout
+		Expected: 	* Name of app in the header
+			* Total amount of computers
+			* Filter input
+			* Filter button
+			* Add new computer button
+			* Table with 4 columns : Name, Introduced/Discontinued Date, Company  
+			* Pagination */
+	  
 		browser.ignoreSynchronization = true;
 
-		MainPage.get();
+		MainPage.get(argv.applicationHost);
 
 		expect(Header.getNameOfTheApplicationInHeaderElement()).toEqual(nameOfTheApplicationInHeader);
 		expect(MainPage.getTotalAmountsOfComputersElement()).toMatch(totalAmountsOfComputers);
@@ -30,3 +42,4 @@ var Header = new header();
 		expect(MainPage.isCompanyLinkPresent()).toBe(true);
   });
 });
+

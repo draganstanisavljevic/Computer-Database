@@ -3,6 +3,7 @@
 'use strict';
 var addComputerPageObject = require('../pages/AddComputer.js')
 var mainPagePageObject = require('../pages/MainPage.js')
+var argv = require('minimist')(process.argv.slice(2));
 
 describe('Computer Database Demo App', function() {
 	
@@ -13,12 +14,28 @@ describe('Computer Database Demo App', function() {
 	var companyLabelValue = "Company";
  
 	it('should check all elements on the page Add Computer', function() {
+		//1.Click Add a new C button
+		//Expected: * Add new C page is opened
+		//2.Verify page layout
+		//Expected: * Name of app in the header
+		  //* Add a computer header
+		  //* Inputs + Labels : 
+		  		//* C name
+		  		//* Introduced date
+		  		//* Discontinued date
+		  //* Company label+selectbox
+		  //* Create C button
+		  //* Cancel button
+		  
 		browser.ignoreSynchronization = true;
 		
 		var AddComputer = new addComputerPageObject();
 		var MainPage = new mainPagePageObject();
-		MainPage.get(); 
-		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
+		MainPage.get(argv.applicationHost);
+		
+		browser.getCurrentUrl().then(function(text){
+			expect(text).toEqual(argv.applicationHost);
+		})
 		
 		MainPage.clickAddNewComputerButton();
 		

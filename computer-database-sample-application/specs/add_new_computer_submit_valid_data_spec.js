@@ -2,14 +2,9 @@
 var addComputerPageObject = require('../pages/AddComputer.js')
 var mainPagePageObject = require('../pages/MainPage.js')
 
+var argv = require('minimist')(process.argv.slice(2));
+
 describe('Add New Computer', function() {
-	
-	// spec.js
-	//Scenario: submit Add new computer form with valid data
-	//Expected: * User is redirected to C view
-	//		  * ${Random} computer is appeared in table
-	//		  * ${Random} computer has valid info which was entered by user
-	//		  * Notification message is shown that C has been created
 	
 	var addComputerPageTitleValue = "Add a computer";
 	var computerNameLabelValue =  "Computer name";
@@ -44,12 +39,23 @@ describe('Add New Computer', function() {
 	var sucesfullyAddedMesage = "Done! Computer " + computerTitle + " has been created";
  
 	it('should submit form on Add Computer page with all valid values', function() {
+
+		/*Scenario: submit Add new computer form with valid data
+			Expected: * User is redirected to C view
+			* ${Random} computer is appeared in table
+			* ${Random} computer has valid info which was entered by user
+			* Notification message is shown that C has been created */
+
+
 		browser.ignoreSynchronization = true;
 		
 		var AddComputer = new addComputerPageObject();
 		var MainPage = new mainPagePageObject();
-		MainPage.get(); 
-		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
+		MainPage.get(argv.applicationHost);
+		
+		browser.getCurrentUrl().then(function(text){
+			expect(text).toEqual(argv.applicationHost);
+		})
 		
 		MainPage.clickAddNewComputerButton();
 		
@@ -59,7 +65,9 @@ describe('Add New Computer', function() {
 		AddComputer.submitAddComputerForm(computerTitle, introducedDate, discontinuedDate, company );
 		
 		expect(MainPage.getSucesfullyAddedMesage()).toEqual(sucesfullyAddedMesage);
-		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
+		browser.getCurrentUrl().then(function(text){
+			expect(text).toEqual(argv.applicationHost);
+		})
 			
 		MainPage.setSearchField(computerTitle);
 		MainPage.submitSearch();

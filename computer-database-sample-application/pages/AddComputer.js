@@ -1,8 +1,6 @@
 'use strict';
 
 var AddComputerPage = function() {
-	
-	var pageUrl = "http://computer-database.herokuapp.com/computers/new";
 
 	var addComputerPageTitleXpath = "//*[@id='main']/h1";
 	var computerNameLabelXpath = "//*[@id='main']/form/fieldset/div[1]/label";
@@ -28,10 +26,7 @@ var AddComputerPage = function() {
 	var cancelLink = element(by.linkText(cancelLinkText));
 	var errorMessageContainer = element(by.xpath(errorMessageContainerXpath));
 	var deleteButton = element(by.xpath(deleteButtonXpath));
-	
-	this.get = function() {
-		browser.get(pageUrl);
-	};
+
   
 	this.getPageTitle = function() {
 		return pageTitleElement.getText();
@@ -128,7 +123,6 @@ var AddComputerPage = function() {
 		this.setCompany(company);
 		submitButton.click();
 	};	
-	
 
 };
 

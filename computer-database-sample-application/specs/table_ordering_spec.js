@@ -1,8 +1,7 @@
-// spec.js
-
 'use strict';
 var addComputerPageObject = require('../pages/AddComputer.js')
 var mainPagePageObject = require('../pages/MainPage.js')
+var argv = require('minimist')(process.argv.slice(2));
 
 describe('Check counter after adding, deleting and cancelling', function() {
 	
@@ -20,8 +19,10 @@ describe('Check counter after adding, deleting and cancelling', function() {
 		
 		AddComputer = new addComputerPageObject();
 		MainPage = new mainPagePageObject();
-		MainPage.get(); 
-		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
+		MainPage.get(argv.applicationHost);
+		browser.getCurrentUrl().then(function(text){
+			expect(text).toEqual(argv.applicationHost);
+		})
 				
 	});
 	
@@ -48,11 +49,9 @@ describe('Check counter after adding, deleting and cancelling', function() {
 			MainPage.clickAddNewComputerButton();
 			AddComputer.submitAddComputerForm("-1", introducedDate, discontinuedDate, company );
 			
-			MainPage.get();
-			var resultTable = element(by.tagName("table"));
-			var listOfComputers = resultTable.all(by.tagName("td")).all(by.tagName("a"));		
-			
-			 resultTable.all(by.tagName("td")).all(by.tagName("a")).map(function(elm, index) {
+			MainPage.get(argv.applicationHost);
+			var resultTable = element(by.tagName("table"));				
+			resultTable.all(by.tagName("td")).all(by.tagName("a")).map(function(elm, index) {
 				return {
 					index: index,
 					text:elm.getText()

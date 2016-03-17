@@ -2,7 +2,6 @@
 
 var MainPage = function() {
 
-  var host = "http://computer-database.herokuapp.com/computers";
   var searchBoxId = "searchbox";  
   var searchSubmitId = "searchsubmit";
   var addNewComputerId = "add";
@@ -31,7 +30,7 @@ var MainPage = function() {
   var sucesfullyAddedMesage = element(by.xpath(sucesfullAddedMesageXpath));
   var succesfullyDeletedMesageContainer = element(by.xpath(succesfullyDeletedMesageXpath));
   
-  this.get = function() {
+  this.get = function(host) {
     browser.get(host);
   };
   

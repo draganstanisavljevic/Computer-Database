@@ -4,6 +4,8 @@
 var addComputerPageObject = require('../pages/AddComputer.js')
 var mainPagePageObject = require('../pages/MainPage.js')
 
+var argv = require('minimist')(process.argv.slice(2));
+
 describe('Add New Computer', function() {
 	
 	var addComputerPageTitleValue = "Add a computer";
@@ -36,8 +38,11 @@ describe('Add New Computer', function() {
 		
 		AddComputer = new addComputerPageObject();
 		MainPage = new mainPagePageObject();
-		MainPage.get(); 
-		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
+		MainPage.get(argv.applicationHost);
+		
+		browser.getCurrentUrl().then(function(text){
+			expect(text).toEqual(argv.applicationHost);
+		})
 		
 		MainPage.clickAddNewComputerButton();
 		
@@ -50,7 +55,9 @@ describe('Add New Computer', function() {
 		AddComputer.cancelFilledForm(computerTitle, introducedDate, discontinuedDate, company );
 		
 		expect(MainPage.getSucesfullyAddedMesage()).not.toBe(sucesfullyAddedMesage);
-		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
+		browser.getCurrentUrl().then(function(text){
+			expect(text).toEqual(argv.applicationHost);
+		})
 			
 	});
 	

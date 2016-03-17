@@ -1,8 +1,8 @@
-// spec.js
-
 'use strict';
 var addComputerPageObject = require('../pages/AddComputer.js')
 var mainPagePageObject = require('../pages/MainPage.js')
+
+var argv = require('minimist')(process.argv.slice(2));
 
 describe('Check counter after adding, deleting and cancelling', function() {
 	
@@ -31,8 +31,10 @@ describe('Check counter after adding, deleting and cancelling', function() {
 		
 		AddComputer = new addComputerPageObject();
 		MainPage = new mainPagePageObject();
-		MainPage.get(); 
-		expect(browser.getCurrentUrl()).toEqual(MainPage.getHost());
+		MainPage.get(argv.applicationHost);
+		browser.getCurrentUrl().then(function(text){
+			expect(text).toEqual(argv.applicationHost);
+		})
 				
 	});
 	
@@ -41,6 +43,7 @@ describe('Check counter after adding, deleting and cancelling', function() {
 		MainPage.getTotalAmountsOfComputersElement().then(function(original_text){
 			MainPage.clickAddNewComputerButton();
 			AddComputer.submitAddComputerForm(computerTitle, introducedDate, discontinuedDate, company );
+			browser.sleep(4000);
             MainPage.getTotalAmountsOfComputersElement().then(function(second_text){
                 expect(parseInt(original_text) + 1).toEqual(parseInt(second_text));
             });
@@ -48,7 +51,7 @@ describe('Check counter after adding, deleting and cancelling', function() {
 		
 			
 	});	
- 
+
 	it('should not change total computer counter after cancellation', function() {
 				
 		MainPage.getTotalAmountsOfComputersElement().then(function(original_text){
@@ -72,5 +75,6 @@ describe('Check counter after adding, deleting and cancelling', function() {
         });
 		
 	});
+	
 	
 });
