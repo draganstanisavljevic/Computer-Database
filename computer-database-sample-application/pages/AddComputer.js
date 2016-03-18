@@ -9,8 +9,7 @@ var AddComputerPage = function() {
 	var companyLabelXpath = "//*[@id='main']/form/fieldset/div[4]/label";
 	var submitButtonXpath = "//*[@id='main']/form/div/input";
 	var cancelLinkText = "Cancel";
-	//var errorMessageContainerXpath = "/html/body/section/form/fieldset/div[1]";
-	var errorMessageContainerXpath = "//*[@id='main']/div[1]";	
+	var errorMessageContainerXpath = "//*[@id='main']/form/fieldset/div[1]";
 	var deleteButtonXpath = "//*[@id='main']/form[2]/input";
 	
 	var pageTitleElement = element(by.xpath(addComputerPageTitleXpath));
@@ -97,7 +96,7 @@ var AddComputerPage = function() {
 	};
 	
 	this.getErrorMessageContainerClass = function(){
-		errorMessageContainer.getAttribute("class");
+		return errorMessageContainer.getAttribute("class");
 	};	
 
 	this.getDeleteButton = function(){

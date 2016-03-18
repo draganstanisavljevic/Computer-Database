@@ -66,8 +66,7 @@ describe('Add New Computer', function() {
 		expect(AddComputer.getPageTitle()).toEqual(addComputerPageTitleValue);		
 		AddComputer.submitAddComputerForm("", introducedDate, discontinuedDate, company );
 		
-		var errorMessageContainer = element(by.xpath("/html/body/section/form/fieldset/div[1]"));
-		expect(errorMessageContainer.getAttribute("class")).toEqual("clearfix error");
+		expect(AddComputer.getErrorMessageContainerClass()).toEqual("clearfix error");		
 	
 	});	
 	
