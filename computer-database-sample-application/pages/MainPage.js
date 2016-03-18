@@ -34,10 +34,6 @@ var MainPage = function() {
     browser.get(host);
   };
   
-  this.getHost = function() {
-    return host;
-  };
-  
   this.getTotalAmountsOfComputersElement = function() {
 	return totalAmountsOfComputersElement.getText();
   }
